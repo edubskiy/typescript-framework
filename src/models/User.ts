@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
+const URL = 'http://localhost:3000/users/';
+
 interface UserProps {
   id?: number;
   name?: string;
@@ -42,7 +44,7 @@ export class User {
 
   fetch(): void {
     axios
-      .get(`http://localhost:3000/users/${this.get('id')}`)
+      .get(`${URL}${this.get('id')}`)
       .then((response: AxiosResponse): void => {
         this.set(response.data);
       });
@@ -52,9 +54,9 @@ export class User {
     const id = this.get('id');
 
     if (id) {
-      axios.put(`http://localhost:3000/users/${id}`, this.data);
+      axios.put(`${URL}${id}`, this.data);
     } else {
-      axios.post('http://localhost:3000/users/', this.data);
+      axios.post(`${URL}`, this.data);
     }
   }
 }
