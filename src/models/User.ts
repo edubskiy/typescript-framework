@@ -1,3 +1,4 @@
+import { Eventing } from './Eventing';
 import axios, { AxiosResponse } from 'axios';
 
 const URL = 'http://localhost:3000/users/';
@@ -9,6 +10,8 @@ interface UserProps {
 }
 
 export class User {
+  public events: Eventing = new Eventing()
+
   constructor(private data: UserProps) {}
 
   get(propName: string): number | string {
