@@ -38,4 +38,16 @@ export class User {
     this.attributes.set(update)
     this.events.trigger('change')
   }
+
+  fetch(): void {
+    const id = this.get('id')
+
+    if (typeof id !== 'number') {
+      throw new Error("Cannout  fetch without and id")
+    }
+
+    this.sync.fetch(id).then((response: AxiosResponse): void => {
+      this.set(response.data)
+    })
+  }
 }
