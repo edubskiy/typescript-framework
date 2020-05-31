@@ -1,6 +1,6 @@
 import { Model } from './Model';
 import { Attributes } from './Attributes';
-import { Sync } from './Sync';
+import { SyncAPI } from './Sync';
 import { Eventing } from './Eventing';
 import axios, { AxiosResponse } from 'axios';
 
@@ -14,4 +14,12 @@ export interface UserProps {
 
 const rootUrl = 'http://localhost:3000/users'
 
-export class User extends Model<UserProps> {}
+export class User extends Model<UserProps> {
+  static build(attrs: UserProps): User {
+    return new User(
+      new Attributes<UserProps>(attrs),
+      new Eventing(),
+      new SyncAPI<UserProps>(rootUrl)
+    )
+  }
+}
