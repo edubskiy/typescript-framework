@@ -1,3 +1,4 @@
+import { Collection } from './Collection';
 import { Model } from './Model';
 import { Attributes } from './Attributes';
 import { SyncAPI } from './Sync';
@@ -21,5 +22,12 @@ export class User extends Model<UserProps> {
       new Eventing(),
       new SyncAPI<UserProps>(rootUrl)
     )
+  }
+
+  static buildUserCollection(): Collection<User, UserProps> {
+    return new Collection<User, UserProps>(
+      rootUrl,
+      (json: UserProps) => User.build(json),
+    );
   }
 }
