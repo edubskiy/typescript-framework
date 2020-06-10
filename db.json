@@ -9,6 +9,11 @@
       "name": "new record",
       "age": 0,
       "id": 2
+    },
+    {
+      "name": "name",
+      "age": 30,
+      "id": 3
     }
   ]
 }
