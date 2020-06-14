@@ -1,13 +1,20 @@
-import { UserEdit } from './views/UserEdit';
-import { User } from './models/User';
+import { UserProps, User } from './models/User';
+import { Collection } from './models/Collection';
+import { UserList } from './views/UserList';
 
-const user = User.build({ name: 'name', age: 30})
-const root = document.getElementById('root')
-if (root != null) {
-  const userEdit = new UserEdit(root, user)
-  userEdit.render()
-  console.log(userEdit);
-} else {
-  throw new Error('No element with root id was found')
-}
+const users = new Collection(
+  'http://localhost:3000/users', 
+  (json: UserProps) => {
+    return User.build(json)
+  }
+)
 
+users.on('change', () => {
+  const root = document.getElementById('root')
+
+  if (root != null) {
+    new UserList(root, users).render()
+  }
+})
+
+users.fetch()
