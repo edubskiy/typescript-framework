@@ -1,4 +1,4 @@
-# Think of it like mini view library that can show all typescript best patterns
+# Think of it like mini view library that can show typescript best patterns
 
 Example
 ```javascript
